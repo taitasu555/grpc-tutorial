@@ -15,3 +15,8 @@ protoCommand:
 	  --go-grpc_out=paths=source_relative:$(OUT_DIR) \
 	  $(PROTO_PATH)/*.proto
 	@echo "Generation complete."
+
+
+.PHONY: bootCommand
+bootCommand:
+	@cd go/services/command && air -c .air.toml

@@ -15,6 +15,13 @@ type categoryServer struct {
 	pb.UnimplementedCategoryCommandServer
 }
 
+func NewCategoryServer(adapter adapter.CategoryAdapter, service service.CategoryService) pb.CategoryCommandServer {
+	return &categoryServer{
+		adapter: adapter,
+		service: service,
+	}
+}
+
 // カテゴリの追加 pb.CategoryCommandServerインターフェイスのメソッド実装
 func (ins *categoryServer) Create(ctx context.Context, param *pb.CategoryUpParam) (*pb.CategoryUpResult, error) {
 	// pb.CategoryUpParamをentity.Categoryに変換する

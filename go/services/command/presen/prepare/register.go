@@ -33,7 +33,7 @@ func loadPem() credentials.TransportCredentials {
 func NewCommandServer(category pb.CategoryCommandServer, product pb.ProductCommandServer) *CommandServer {
 	//grpc serverを作成する
 	server := grpc.NewServer(
-		grpc.Creds(loadPem()),
+	// grpc.Creds(loadPem()),
 	)
 
 	pb.RegisterCategoryCommandServer(server, category)

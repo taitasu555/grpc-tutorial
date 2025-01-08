@@ -1,0 +1,58 @@
+//
+//  CommandService用のParam型とResult型を定義したprotoファイル
+//
+syntax = "proto3";
+
+option go_package = "/pb";
+
+import "models.proto";
+import "error.proto";
+
+import "google/protobuf/timestamp.proto";
+
+package proto;
+
+enum CRUD {
+    UNKNOWN = 0;
+    INSERT = 1;
+    UPDATE = 2;
+    DELETE = 3;
+}
+
+message CategoryUpParam {
+    CRUD crud = 1;
+    string id = 2;
+    string name = 3;
+}
+
+message ProductUpParam {
+    CRUD crud = 1;
+    string id = 2;
+    string name = 3;
+    int32 price = 4;
+    string categoryId = 5;
+}
+
+message CategoryUpResult {
+    Category category = 1;
+    Error error = 2;
+    google.protobuf.Timestamp timestamp = 3;
+}
+
+message ProductUpResult {
+    Product product = 1;
+    Error error = 2;
+    google.protobuf.Timestamp timestamp = 3;
+}
+
+service CategoryCommand {
+    rpc Create(CategoryUpParam) returns (CategoryUpResult);
+    rpc Update(CategoryUpParam) returns (CategoryUpResult);
+    rpc Delete(CategoryUpParam) returns (CategoryUpResult);
+}
+
+service ProductCommand {
+    rpc Create(ProductUpParam) returns (ProductUpResult);
+    rpc Update(ProductUpParam) returns (ProductUpResult);
+    rpc Delete(ProductUpParam) returns (ProductUpResult);
+}

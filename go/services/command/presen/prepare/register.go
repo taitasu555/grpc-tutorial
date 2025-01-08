@@ -4,7 +4,10 @@ import (
 	"crypto/tls"
 	"embed"
 
-	"github.com/rakyll/statik/fs"
+	"github.com/grpc-tutorial/go/services/command/proto/pb"
+
+	"io/fs"
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 )
@@ -27,10 +30,13 @@ func loadPem() credentials.TransportCredentials {
 	}
 }
 
-func NewCommandServer() *CommandServer {
+func NewCommandServer(category pb.CategoryCommandServer, product pb.ProductCommandServer) *CommandServer {
 	//grpc serverを作成する
 	server := grpc.NewServer(
 		grpc.Creds(loadPem()),
 	)
+
+	pb.RegisterCategoryCommandServer(server, category)
+	pb.RegisterProductCommandServer(server, product)
 	return &CommandServer{Server: server}
 }

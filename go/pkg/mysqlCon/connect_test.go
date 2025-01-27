@@ -28,8 +28,8 @@ var _ = Describe("データベース接続テスト", func() {
 		absPath := filepath.Join(dir, "database.toml")
 
 		// 環境変数に設定
-		os.Setenv("DATABSE_TOML_PATH", absPath)
-		defer os.Unsetenv("DATABSE_TOML_PATH") // テスト後に環境変数をクリーンアップ
+		os.Setenv("DATABASE_TOML_PATH", absPath)
+		defer os.Unsetenv("DATABASE_TOML_PATH") // テスト後に環境変数をクリーンアップ
 
 		result := mysqlCon.DBConnect()
 		Expect(result).To(BeNil())

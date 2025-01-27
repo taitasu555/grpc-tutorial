@@ -11,6 +11,9 @@ import (
 	"google.golang.org/grpc/reflection"
 )
 
+/*
+/ 引数serverはfx.Provideで登録された値が渡る
+*/
 func CommandServiceLifecycle(lifecycle fx.Lifecycle, server *CommandServer) {
 	lifecycle.Append(fx.Hook{
 		// fx start

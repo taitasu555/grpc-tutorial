@@ -23,7 +23,7 @@ type DBConfig struct {
 // database.tomlから接続情報を取得してDbConfig型で返す
 func tomlRead() (*DBConfig, error) {
 	// 環境変数からファイルパスを取得する
-	path := os.Getenv("DATABSE_TOML_PATH")
+	path := os.Getenv("DATABASE_TOML_PATH")
 	if path == "" {
 		// 環境変数が無い場合のパスを設定する
 		path = "./database.toml"
@@ -52,6 +52,7 @@ func DBConnect() error {
 
 	// データベースに接続する
 	conn, err := sql.Open(rdbms, connect_str)
+
 	if err != nil {
 		return DBErrHandler(err)
 	}
